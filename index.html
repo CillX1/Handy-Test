@@ -6,538 +6,687 @@
 <title>Bin ich handysüchtig? – Selbsttest</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --bg: #F7F6F2;
-    --surface: #FFFFFF;
-    --ink: #1A1917;
-    --ink-muted: #6B6A66;
-    --ink-faint: #A8A7A3;
-    --border: rgba(26,25,23,0.1);
-    --border-md: rgba(26,25,23,0.18);
-    --purple: #534AB7;
-    --purple-light: #EEEDFE;
-    --purple-dark: #26215C;
-    --green: #0F6E56;
-    --green-light: #E1F5EE;
-    --amber: #BA7517;
-    --amber-light: #FAEEDA;
-    --coral: #D85A30;
-    --coral-light: #FAECE7;
-    --red: #A32D2D;
-    --red-light: #FCEBEB;
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 18px;
-  }
+:root {
+  --bg: #0F0F12;
+  --surface: #18181F;
+  --surface2: #1F1F28;
+  --ink: #F0EFE8;
+  --ink-muted: #9A9991;
+  --ink-faint: #4A4A52;
+  --border: rgba(240,239,232,0.08);
+  --border-md: rgba(240,239,232,0.14);
+  --accent: #7C6EF5;
+  --accent-light: rgba(124,110,245,0.12);
+  --accent-glow: rgba(124,110,245,0.25);
+  --green: #3ECF8E;
+  --green-dim: rgba(62,207,142,0.12);
+  --amber: #F5A623;
+  --amber-dim: rgba(245,166,35,0.12);
+  --coral: #F5614A;
+  --coral-dim: rgba(245,97,74,0.12);
+  --red: #E53935;
+  --red-dim: rgba(229,57,53,0.12);
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+}
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    min-height: 100vh;
-    line-height: 1.6;
-  }
+html { scroll-behavior: smooth; }
 
-  /* ── Header ── */
-  header {
-    padding: 2rem 1.5rem 0;
-    max-width: 680px;
-    margin: 0 auto;
-  }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+  line-height: 1.6;
+}
 
-  .site-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-bottom: 1.5rem;
-  }
+/* ── Layout ── */
+.page {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 0 1.25rem 5rem;
+}
 
-  .hero-headline {
-    font-size: clamp(28px, 6vw, 44px);
-    font-weight: 300;
-    line-height: 1.15;
-    color: var(--ink);
-    letter-spacing: -0.02em;
-    margin-bottom: 0.75rem;
-  }
+/* ── Top bar ── */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0 0;
+  margin-bottom: 2.5rem;
+}
 
-  .hero-headline em {
-    font-style: italic;
-    color: var(--purple);
-  }
+.logo {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
 
-  .hero-sub {
-    font-size: 15px;
-    color: var(--ink-muted);
-    max-width: 480px;
-    margin-bottom: 2rem;
-  }
+.badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  background: var(--accent-light);
+  border: 0.5px solid rgba(124,110,245,0.3);
+  border-radius: 99px;
+  padding: 4px 10px;
+}
 
-  /* ── Screen number indicator ── */
-  .screen-counter {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--ink-faint);
-    letter-spacing: 0.08em;
-    margin-bottom: 1rem;
-  }
+/* ── Intro ── */
+.intro-headline {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(36px, 8vw, 58px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
 
-  /* ── Progress ── */
-  .progress-track {
-    height: 2px;
-    background: var(--border);
-    border-radius: 99px;
-    margin-bottom: 2.5rem;
-    overflow: hidden;
-  }
+.intro-headline em {
+  font-style: italic;
+  color: var(--accent);
+}
 
-  .progress-fill {
-    height: 2px;
-    background: var(--purple);
-    border-radius: 99px;
-    transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
-  }
+.intro-sub {
+  font-size: 15px;
+  color: var(--ink-muted);
+  line-height: 1.7;
+  max-width: 480px;
+  margin-bottom: 2rem;
+}
 
-  /* ── Main layout ── */
-  main {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem 4rem;
-  }
+/* ── Privacy notice ── */
+.privacy-box {
+  background: var(--surface);
+  border: 0.5px solid var(--border-md);
+  border-radius: var(--r-lg);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
 
-  /* ── Question card ── */
-  .q-card {
-    background: var(--surface);
-    border-radius: var(--radius-lg);
-    border: 0.5px solid var(--border-md);
-    padding: 2rem;
-    margin-bottom: 1.25rem;
-  }
+.privacy-box h2 {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
-  .q-cat {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--purple);
-    margin-bottom: 0.75rem;
-  }
+.privacy-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+  font-size: 13px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
 
-  .q-text {
-    font-size: 19px;
-    font-weight: 400;
-    line-height: 1.4;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-  }
+.privacy-row:last-child { margin-bottom: 0; }
 
-  /* ── Options ── */
-  .options {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
+.picon {
+  font-size: 15px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
 
-  .opt {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px 18px;
-    background: var(--surface);
-    border: 0.5px solid var(--border-md);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: border-color 0.15s, background 0.15s, transform 0.1s;
-    text-align: left;
-    width: 100%;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    color: var(--ink);
-    -webkit-appearance: none;
-  }
+/* ── Stats row ── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 2rem;
+}
 
-  .opt:hover {
-    border-color: var(--purple);
-    background: var(--purple-light);
-    transform: translateX(3px);
-  }
+.stat-box {
+  background: var(--surface);
+  border: 0.5px solid var(--border-md);
+  border-radius: var(--r-md);
+  padding: 1rem;
+  text-align: center;
+}
 
-  .opt.selected {
-    border: 1.5px solid var(--purple);
-    background: var(--purple-light);
-    color: var(--purple-dark);
-  }
+.stat-num {
+  font-family: 'Instrument Serif', serif;
+  font-size: 28px;
+  color: var(--accent);
+  display: block;
+  line-height: 1;
+  margin-bottom: 4px;
+}
 
-  .opt-dot {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border: 1.5px solid var(--border-md);
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: border-color 0.15s, background 0.15s;
-  }
+.stat-lbl {
+  font-size: 11px;
+  color: var(--ink-faint);
+}
 
-  .opt.selected .opt-dot {
-    background: var(--purple);
-    border-color: var(--purple);
-  }
+/* ── Start button ── */
+.start-btn {
+  width: 100%;
+  padding: 18px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: var(--r-md);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: -0.01em;
+  position: relative;
+  overflow: hidden;
+}
 
-  .opt.selected .opt-dot::after {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: white;
-  }
+.start-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 60%);
+}
 
-  .opt-text {
-    flex: 1;
-    line-height: 1.4;
-  }
+.start-btn:hover {
+  background: #6B5EE0;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 32px var(--accent-glow);
+}
 
-  /* ── Navigation ── */
-  .nav-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-  }
+/* ── Progress ── */
+.prog-wrap {
+  margin-bottom: 2rem;
+}
 
-  .btn {
-    padding: 12px 24px;
-    border-radius: var(--radius-sm);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.15s;
-    border: 0.5px solid var(--border-md);
-    background: var(--surface);
-    color: var(--ink);
-  }
+.prog-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
 
-  .btn:hover { background: var(--bg); }
+.prog-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-faint);
+  letter-spacing: 0.08em;
+}
 
-  .btn-primary {
-    background: var(--purple);
-    color: white;
-    border-color: var(--purple);
-  }
+.prog-cat {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
 
-  .btn-primary:hover { background: var(--purple-dark); border-color: var(--purple-dark); }
-  .btn-primary:disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+.prog-track {
+  height: 2px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
 
-  .btn:disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+.prog-fill {
+  height: 2px;
+  background: var(--accent);
+  border-radius: 99px;
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+}
 
-  /* ── Intro screen ── */
-  .intro-card {
-    background: var(--surface);
-    border-radius: var(--radius-lg);
-    border: 0.5px solid var(--border-md);
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-  }
+/* ── Question ── */
+.q-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border-md);
+  border-radius: var(--r-xl);
+  padding: 2rem;
+  margin-bottom: 1rem;
+}
 
-  .stat-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border-radius: var(--radius-sm);
-    overflow: hidden;
-    margin: 1.5rem 0;
-  }
+.q-text {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
 
-  .stat-cell {
-    background: var(--bg);
-    padding: 1rem 0.75rem;
-    text-align: center;
-  }
+/* ── Options ── */
+.options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem; }
 
-  .stat-num {
-    font-size: 22px;
-    font-weight: 500;
-    color: var(--purple);
-    display: block;
-    letter-spacing: -0.02em;
-  }
+.opt {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 18px;
+  background: var(--surface);
+  border: 0.5px solid var(--border-md);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+  width: 100%;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--ink-muted);
+}
 
-  .stat-lbl {
-    font-size: 11px;
-    color: var(--ink-muted);
-    margin-top: 2px;
-  }
+.opt:hover {
+  border-color: var(--accent);
+  color: var(--ink);
+  background: var(--accent-light);
+}
 
-  .intro-note {
-    font-size: 13px;
-    color: var(--ink-muted);
-    line-height: 1.6;
-    padding: 12px 16px;
-    background: var(--purple-light);
-    border-radius: var(--radius-sm);
-    border-left: 2.5px solid var(--purple);
-  }
+.opt.selected {
+  border: 1.5px solid var(--accent);
+  background: var(--accent-light);
+  color: var(--ink);
+}
 
-  /* ── Result screen ── */
-  .result-hero {
-    background: var(--surface);
-    border-radius: var(--radius-lg);
-    border: 0.5px solid var(--border-md);
-    padding: 2.5rem 2rem;
-    text-align: center;
-    margin-bottom: 1.25rem;
-    position: relative;
-    overflow: hidden;
-  }
+.opt-radio {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink-faint);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
 
-  .result-hero::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 4px;
-    background: var(--result-color, var(--purple));
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  }
+.opt.selected .opt-radio {
+  background: var(--accent);
+  border-color: var(--accent);
+}
 
-  .result-pct {
-    font-size: 72px;
-    font-weight: 300;
-    letter-spacing: -0.04em;
-    color: var(--result-color, var(--purple));
-    line-height: 1;
-    margin-bottom: 0.25rem;
-  }
+.opt.selected .opt-radio::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: white;
+}
 
-  .result-label {
-    font-size: 17px;
-    font-weight: 500;
-    color: var(--ink);
-    margin-bottom: 1rem;
-  }
+/* ── Nav ── */
+.nav-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
 
-  .result-bar-bg {
-    height: 6px;
-    background: var(--border);
-    border-radius: 99px;
-    overflow: hidden;
-    margin: 1.25rem auto;
-    max-width: 320px;
-  }
+.btn-back {
+  padding: 12px 20px;
+  border-radius: var(--r-sm);
+  border: 0.5px solid var(--border-md);
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--ink-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
 
-  .result-bar-fill {
-    height: 6px;
-    border-radius: 99px;
-    transition: width 1s cubic-bezier(0.4,0,0.2,1);
-    width: 0%;
-  }
+.btn-back:hover { color: var(--ink); border-color: var(--border-md); }
+.btn-back:disabled { opacity: 0.25; pointer-events: none; }
 
-  .result-desc {
-    font-size: 14px;
-    color: var(--ink-muted);
-    line-height: 1.7;
-    max-width: 440px;
-    margin: 0 auto;
-  }
+.btn-next {
+  padding: 12px 24px;
+  border-radius: var(--r-sm);
+  border: none;
+  background: var(--accent);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  transition: all 0.15s;
+  flex: 1;
+}
 
-  /* ── Category breakdown ── */
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-bottom: 0.75rem;
-  }
+.btn-next:hover { background: #6B5EE0; }
+.btn-next:disabled { opacity: 0.3; pointer-events: none; }
 
-  .cat-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 1.25rem;
-  }
+/* ── Loading ── */
+.loading-wrap {
+  text-align: center;
+  padding: 4rem 1rem;
+}
 
-  .cat-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border-md);
-    border-radius: var(--radius-md);
-    padding: 1rem 1.1rem;
-  }
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 1.5rem;
+}
 
-  .cat-name {
-    font-size: 12px;
-    color: var(--ink-muted);
-    margin-bottom: 8px;
-    font-weight: 400;
-  }
+@keyframes spin { to { transform: rotate(360deg); } }
 
-  .cat-bar-bg {
-    height: 4px;
-    background: var(--border);
-    border-radius: 99px;
-    overflow: hidden;
-    margin-bottom: 6px;
-  }
+.loading-text {
+  font-family: 'Instrument Serif', serif;
+  font-size: 20px;
+  color: var(--ink-muted);
+  margin-bottom: 0.5rem;
+}
 
-  .cat-bar-fill {
-    height: 4px;
-    border-radius: 99px;
-    transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
-    width: 0%;
-  }
+.loading-sub {
+  font-size: 13px;
+  color: var(--ink-faint);
+}
 
-  .cat-score-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-  }
+/* ── Result ── */
+.result-score-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border-md);
+  border-radius: var(--r-xl);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
+}
 
-  .cat-pct {
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-  }
+.result-score-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--result-accent, var(--accent));
+}
 
-  .cat-verdict {
-    font-size: 11px;
-    color: var(--ink-faint);
-  }
+.result-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 1rem;
+}
 
-  /* ── Tips card ── */
-  .tips-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border-md);
-    border-radius: var(--radius-lg);
-    padding: 1.5rem 2rem;
-    margin-bottom: 1.25rem;
-  }
+.result-pct {
+  font-family: 'Instrument Serif', serif;
+  font-size: 80px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--result-accent, var(--accent));
+  margin-bottom: 0.25rem;
+}
 
-  .tips-card h3 {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--ink);
-    margin-bottom: 1rem;
-  }
+.result-label {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
 
-  .tip-item {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    margin-bottom: 0.75rem;
-    font-size: 14px;
-    color: var(--ink-muted);
-    line-height: 1.5;
-  }
+.result-bar-bg {
+  height: 4px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+  max-width: 280px;
+  margin: 0 auto 1.5rem;
+}
 
-  .tip-icon {
-    font-size: 16px;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
+.result-bar-fill {
+  height: 4px;
+  border-radius: 99px;
+  width: 0%;
+  transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+}
 
-  /* ── Source note ── */
-  .source {
-    font-size: 11px;
-    color: var(--ink-faint);
-    text-align: center;
-    margin-top: 2rem;
-    line-height: 1.6;
-  }
+/* ── Cat grid ── */
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 0.75rem;
+}
 
-  /* ── Animations ── */
-  .fade-in {
-    animation: fadeIn 0.3s ease forwards;
-  }
+.cat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+.cat-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border-md);
+  border-radius: var(--r-md);
+  padding: 1rem 1.1rem;
+}
 
-  /* ── Responsive ── */
-  @media (max-width: 480px) {
-    .cat-grid { grid-template-columns: 1fr; }
-    .stat-row { grid-template-columns: 1fr; }
-    .q-card, .intro-card, .result-hero, .tips-card { padding: 1.5rem; }
-    .result-pct { font-size: 56px; }
-  }
+.cat-name { font-size: 11px; color: var(--ink-faint); margin-bottom: 8px; }
+
+.cat-bar-bg {
+  height: 3px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.cat-bar-fill {
+  height: 3px;
+  border-radius: 99px;
+  width: 0%;
+  transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
+}
+
+.cat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.cat-pct {
+  font-family: 'Instrument Serif', serif;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+
+.cat-word {
+  font-size: 11px;
+  color: var(--ink-faint);
+}
+
+/* ── AI Analysis card ── */
+.ai-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border-md);
+  border-radius: var(--r-xl);
+  padding: 1.75rem;
+  margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--accent) 0%, transparent 100%);
+}
+
+.ai-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.ai-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.ai-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.ai-text {
+  font-size: 14px;
+  color: var(--ink-muted);
+  line-height: 1.8;
+}
+
+/* ── Tips ── */
+.tips-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border-md);
+  border-radius: var(--r-lg);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.tips-card h3 {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+
+.tip-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+  font-size: 13px;
+  color: var(--ink-muted);
+  line-height: 1.55;
+}
+
+.tip-row:last-child { margin-bottom: 0; }
+.tip-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+
+/* ── Restart ── */
+.restart-btn {
+  width: 100%;
+  padding: 14px;
+  background: transparent;
+  border: 0.5px solid var(--border-md);
+  border-radius: var(--r-md);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--ink-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-bottom: 1rem;
+}
+
+.restart-btn:hover { color: var(--ink); border-color: var(--border-md); }
+
+.source-note {
+  font-size: 11px;
+  color: var(--ink-faint);
+  text-align: center;
+  line-height: 1.6;
+  margin-top: 1.5rem;
+}
+
+/* ── Fade ── */
+.fade-in { animation: fadeUp 0.35s ease forwards; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .cat-grid { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: 1fr; }
+  .result-pct { font-size: 64px; }
+  .intro-headline { font-size: 34px; }
+}
 </style>
 </head>
 <body>
-
-<header>
-  <div class="site-tag">Schulprojekt · Handysucht · Selbsttest</div>
-  <h1 class="hero-headline">Bin ich <em>handysüchtig</em>?</h1>
-  <p class="hero-sub">15 ehrliche Fragen, die dir zeigen, wie du wirklich mit deinem Smartphone umgehst.</p>
-</header>
-
-<main id="app"></main>
+<div class="page">
+  <div class="topbar">
+    <span class="logo">Handysucht · Selbsttest</span>
+    <span class="badge">Schulprojekt 2025 · Cillian Fontannaz</span>
+  </div>
+  <div id="app"></div>
+</div>
 
 <script>
 const questions = [
-  { cat: "Kontrollverlust", text: "Wie oft nimmst du dein Handy in die Hand, ohne einen bestimmten Grund?" , opts: ["Fast nie", "Manchmal (1–2x täglich)", "Oft (mehrmals täglich)", "Ständig – fast automatisch"] },
+  { cat: "Kontrollverlust", text: "Wie oft nimmst du dein Handy in die Hand, ohne einen bestimmten Grund?", opts: ["Fast nie", "Manchmal (1–2x täglich)", "Oft (mehrmals täglich)", "Ständig – fast automatisch"] },
   { cat: "Entzug", text: "Wie fühlst du dich, wenn du mehrere Stunden lang kein Handy benutzen kannst?", opts: ["Entspannt und unbesorgt", "Leicht unruhig", "Nervös und ungeduldig", "Sehr gestresst oder ängstlich"] },
   { cat: "Schlaf", text: "Schaust du auf dein Handy kurz bevor du schläfst oder direkt nach dem Aufwachen?", opts: ["Nein, fast nie", "Selten", "Oft", "Ja, immer – es ist das Erste und Letzte"] },
-  { cat: "Soziales", text: "Benutzt du dein Handy während du mit anderen Menschen zusammen bist (Essen, Gespräche)?", opts: ["Nein, nie", "Selten", "Manchmal", "Ja, sehr oft"] },
+  { cat: "Soziales", text: "Benutzt du dein Handy während du mit anderen Menschen zusammen bist?", opts: ["Nein, nie", "Selten", "Manchmal", "Ja, sehr oft"] },
   { cat: "Zeitwahrnehmung", text: "Verlierst du beim Handy-Benutzen das Gefühl für die Zeit?", opts: ["Nein", "Selten", "Manchmal", "Sehr oft – Stunden vergehen unbemerkt"] },
-  { cat: "Kontrollverlust", text: "Hast du schon versucht, weniger auf dein Handy zu schauen, aber es nicht geschafft?", opts: ["Nein, ich nutze es bewusst", "Einmal versucht", "Mehrmals versucht, ohne grossen Erfolg", "Oft versucht – es gelingt mir kaum"] },
+  { cat: "Kontrollverlust", text: "Hast du schon versucht, weniger auf dein Handy zu schauen, aber es nicht geschafft?", opts: ["Nein, ich nutze es bewusst", "Einmal versucht", "Mehrmals versucht, ohne Erfolg", "Oft versucht – es gelingt mir kaum"] },
   { cat: "Schlaf", text: "Liegst du nachts wach und schaust auf dein Handy, statt zu schlafen?", opts: ["Nie", "Selten", "Manchmal", "Regelmässig"] },
   { cat: "Entzug", text: "Wirst du unruhig oder gereizt, wenn jemand dein Handy wegnimmt oder der Akku leer ist?", opts: ["Nein, ich bleibe ruhig", "Leicht genervt", "Ziemlich genervt", "Sehr aufgewühlt"] },
-  { cat: "Soziales", text: "Bevorzugst du es, auf dem Handy zu kommunizieren statt persönlich zu reden?", opts: ["Nein, ich mag persönliche Gespräche mehr", "Es ist etwa gleich", "Eher online", "Ja, fast immer online"] },
-  { cat: "Zeitwahrnehmung", text: "Wie viele Stunden am Tag nutzt du dein Handy schätzungsweise (ausser Schule/Arbeit)?", opts: ["Unter 1 Stunde", "1–2 Stunden", "3–4 Stunden", "5 Stunden oder mehr"] },
+  { cat: "Soziales", text: "Bevorzugst du es, auf dem Handy zu kommunizieren statt persönlich zu reden?", opts: ["Nein, persönliche Gespräche sind mir wichtiger", "Es ist etwa gleich", "Eher online", "Ja, fast immer online"] },
+  { cat: "Zeitwahrnehmung", text: "Wie viele Stunden täglich nutzt du dein Handy (ausser Schule/Arbeit)?", opts: ["Unter 1 Stunde", "1–2 Stunden", "3–4 Stunden", "5 Stunden oder mehr"] },
   { cat: "Kontrollverlust", text: "Nutzt du dein Handy, um dich von schlechten Gefühlen oder Langeweile abzulenken?", opts: ["Selten oder nie", "Manchmal", "Oft", "Fast immer"] },
-  { cat: "Entzug", text: "Prüfst du dein Handy auf Nachrichten, obwohl es nicht gepiept hat?", opts: ["Nein", "Selten", "Manchmal", "Sehr oft – aus reiner Gewohnheit"] },
-  { cat: "Soziales", text: "Hat dich schon jemand (Familie, Freunde) darauf angesprochen, dass du zu viel auf dein Handy schaust?", opts: ["Nein, nie", "Einmal", "Mehrmals", "Oft – und ich finde es normal"] },
+  { cat: "Entzug", text: "Prüfst du dein Handy auf Nachrichten, obwohl es gar nicht gepiept hat?", opts: ["Nein", "Selten", "Manchmal", "Sehr oft – aus reiner Gewohnheit"] },
+  { cat: "Soziales", text: "Hat dich schon jemand darauf angesprochen, dass du zu viel auf dein Handy schaust?", opts: ["Nein, nie", "Einmal", "Mehrmals", "Oft – und ich finde es normal"] },
   { cat: "Schlaf", text: "Wie lange vor dem Einschlafen legst du dein Handy weg?", opts: ["Über 1 Stunde vorher", "30–60 Minuten", "Kurz davor (unter 15 Min.)", "Ich schlafe ein, während ich schaue"] },
-  { cat: "Zeitwahrnehmung", text: "Checkst du dein Handy während des Unterrichts oder bei wichtigen Momenten heimlich?", opts: ["Nein, nie", "Selten", "Manchmal", "Regelmässig"] }
+  { cat: "Zeitwahrnehmung", text: "Checkst du dein Handy während des Unterrichts oder wichtigen Momenten heimlich?", opts: ["Nein, nie", "Selten", "Manchmal", "Regelmässig"] }
 ];
 
 const cats = ["Kontrollverlust", "Entzug", "Schlaf", "Soziales", "Zeitwahrnehmung"];
-const catColors = {
-  "Kontrollverlust": "#534AB7",
-  "Entzug": "#D85A30",
-  "Schlaf": "#0F6E56",
-  "Soziales": "#D4537E",
-  "Zeitwahrnehmung": "#BA7517"
-};
+const catColors = { "Kontrollverlust": "#7C6EF5", "Entzug": "#F5614A", "Schlaf": "#3ECF8E", "Soziales": "#F5A623", "Zeitwahrnehmung": "#60A5FA" };
 
 const tips = {
   low: [
-    { icon: "✓", text: "Du gehst schon sehr bewusst mit deinem Handy um – versuch dieses Bewusstsein zu behalten." },
-    { icon: "📱", text: "Schaue weiterhin ab und zu auf deine Bildschirmzeit in den Einstellungen, nur zur Kontrolle." },
-    { icon: "💬", text: "Teile deine Gewohnheiten mit Freunden, die vielleicht mehr kämpfen – dein Beispiel hilft." }
+    { icon: "✓", text: "Du gehst bereits sehr bewusst mit deinem Handy um – behalte diese Gewohnheit bei." },
+    { icon: "📊", text: "Schau gelegentlich in die Bildschirmzeit-Einstellungen, nur um sicher zu gehen." },
+    { icon: "💬", text: "Teile deine Tipps mit Freunden, die vielleicht mehr damit kämpfen." }
   ],
   mid: [
     { icon: "🌙", text: "Lege dein Handy 30 Minuten vor dem Schlafen weg und lade es ausserhalb des Schlafzimmers." },
-    { icon: "⏱", text: "Setze dir täglich ein Limit in den Screen-Time-Einstellungen (iOS) oder Digital Wellbeing (Android)." },
-    { icon: "🍽", text: "Probiere handyfreie Zeiten ein: beim Essen und im Gespräch mit Familie oder Freunden." }
+    { icon: "⏱", text: "Setze tägliche Limits in den Screen-Time-Einstellungen (iOS) oder Digital Wellbeing (Android)." },
+    { icon: "🍽", text: "Handy beim Essen weglegen – dieses eine Ritual verändert viel." }
   ],
   high: [
-    { icon: "🚫", text: "Deaktiviere alle nicht-wichtigen Benachrichtigungen – jede Ping-Meldung lädt zum Greifen ein." },
-    { icon: "⏰", text: "Starte den Tag ohne Handy: Leg dir einen klassischen Wecker und schau erst nach 30 Min. auf dein Gerät." },
-    { icon: "🧠", text: "Sprich mit einer Vertrauensperson (Eltern, Lehrperson) über deine Handygewohnheiten." },
-    { icon: "📵", text: "Probiere bewusst handyfreie Tage oder Stunden – starte mit 2 Stunden und steigere dich." }
+    { icon: "🚫", text: "Deaktiviere alle nicht-wichtigen Benachrichtigungen – jede Meldung lädt zum Greifen ein." },
+    { icon: "⏰", text: "Starte den Tag ohne Handy: Kauf dir einen Wecker und schau erst nach 30 Minuten auf dein Gerät." },
+    { icon: "🧠", text: "Sprich offen mit einer Vertrauensperson über deine Handygewohnheiten." },
+    { icon: "📵", text: "Starte mit bewussten handyfreien Stunden – z.B. immer nach dem Mittag 2 Stunden Pause." }
   ]
 };
 
-let answers = new Array(questions.length).fill(null);
-let current = 0;
-let phase = "intro";
-
 function getLevel(pct) {
-  if (pct < 30) return { label: "Kein Anzeichen von Sucht", color: "#0F6E56", bg: "#E1F5EE", tipLevel: "low", desc: "Du gehst sehr bewusst mit deinem Handy um. Es ist für dich ein Werkzeug, keine Ablenkung. Behalte dieses Bewusstsein." };
-  if (pct < 50) return { label: "Kontrollierter Gebrauch", color: "#3B6D11", bg: "#EAF3DE", tipLevel: "low", desc: "Du nutzt dein Handy regelmässig, hast aber die Kontrolle. Achte trotzdem auf kritische Momente – z.B. direkt vor dem Einschlafen." };
-  if (pct < 65) return { label: "Problematischer Gebrauch", color: "#BA7517", bg: "#FAEEDA", tipLevel: "mid", desc: "Es gibt Bereiche, wo das Handy deinen Alltag beeinflusst. Kleine gezielte Veränderungen können schon viel bewirken." };
-  if (pct < 80) return { label: "Starke Abhängigkeitszeichen", color: "#D85A30", bg: "#FAECE7", tipLevel: "high", desc: "Du zeigst deutliche Merkmale von problematischem Handykonsum. Handyfreie Zeiten und bewusste Pausen sind jetzt wichtig." };
-  return { label: "Sehr hohe Abhängigkeit", color: "#A32D2D", bg: "#FCEBEB", tipLevel: "high", desc: "Dein Handykonsum beeinträchtigt wahrscheinlich deinen Alltag stark. Such dir Unterstützung – bei Lehrpersonen, Eltern oder einer Fachstelle." };
+  if (pct < 30) return { label: "Kein Anzeichen von Sucht", color: "#3ECF8E", tipKey: "low" };
+  if (pct < 50) return { label: "Kontrollierter Gebrauch", color: "#60A5FA", tipKey: "low" };
+  if (pct < 65) return { label: "Problematischer Gebrauch", color: "#F5A623", tipKey: "mid" };
+  if (pct < 80) return { label: "Starke Abhängigkeitszeichen", color: "#F5614A", tipKey: "high" };
+  return { label: "Sehr hohe Abhängigkeit", color: "#E53935", tipKey: "high" };
 }
 
 function catScore(cat) {
@@ -546,155 +695,247 @@ function catScore(cat) {
   return Math.round((total / (qs.length * 3)) * 100);
 }
 
-function catVerdict(pct) {
+function catWord(pct) {
   if (pct < 35) return "gut";
   if (pct < 60) return "okay";
   if (pct < 80) return "kritisch";
   return "hoch";
 }
 
+let answers = new Array(questions.length).fill(null);
+let current = 0;
+let phase = "intro";
+
+// ── RENDER INTRO ──
 function renderIntro() {
   document.getElementById("app").innerHTML = `
     <div class="fade-in">
-      <div class="intro-card">
-        <p style="font-size:15px; color:var(--ink-muted); line-height:1.7; margin-bottom:1.25rem;">
-          Dieser Test hilft dir herauszufinden, wie du wirklich mit deinem Smartphone umgehst – 
-          ehrlich, ohne Urteil. Die Fragen basieren auf anerkannten Kriterien aus der Suchtforschung.
-        </p>
-        <div class="stat-row">
-          <div class="stat-cell">
-            <span class="stat-num">15</span>
-            <div class="stat-lbl">Fragen</div>
-          </div>
-          <div class="stat-cell">
-            <span class="stat-num">5</span>
-            <div class="stat-lbl">Bereiche</div>
-          </div>
-          <div class="stat-cell">
-            <span class="stat-num">~3 Min</span>
-            <div class="stat-lbl">Dauer</div>
-          </div>
+      <h1 class="intro-headline">Sind wir schon<br><em>handysüchtig?</em></h1>
+      <p class="intro-sub">Beantworte 15 Fragen und erfahre, wie abhängig du wirklich von deinem Smartphone bist – ehrlich, ohne Urteil.</p>
+
+      <div class="privacy-box">
+        <h2>🔒 Datenschutz & Hinweise</h2>
+        <div class="privacy-row">
+          <span class="picon">🛡️</span>
+          <span>Deine Antworten werden <strong>nicht gespeichert</strong> und nirgends übermittelt. Alles bleibt auf deinem Gerät.</span>
         </div>
-        <div class="intro-note">
-          Deine Antworten bleiben privat – alles wird nur in deinem Browser berechnet, nichts wird gespeichert oder übermittelt.
+        <div class="privacy-row">
+          <span class="picon">🤖</span>
+          <span>Die <strong>Schlussauswertung wird von einer KI generiert</strong> – basierend auf deinen persönlichen Antworten zu Handysucht.</span>
+        </div>
+        <div class="privacy-row">
+          <span class="picon">📋</span>
+          <span>Dieser Test basiert auf der Smartphone Addiction Scale (SAS) und dient der <strong>Selbstreflexion</strong>, nicht als klinische Diagnose.</span>
         </div>
       </div>
-      <div style="margin-bottom:0.75rem;">
-        <div class="section-label">Die 5 Bereiche</div>
-        <div style="display:flex; flex-wrap:wrap; gap:8px;">
-          ${cats.map(c => `<span style="padding:6px 12px; border-radius:99px; font-size:12px; font-weight:500; background:var(--purple-light); color:var(--purple-dark); border:0.5px solid rgba(83,74,183,0.2);">${c}</span>`).join('')}
+
+      <div class="stats-row">
+        <div class="stat-box">
+          <span class="stat-num">15</span>
+          <div class="stat-lbl">Fragen</div>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">5</span>
+          <div class="stat-lbl">Bereiche</div>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">~3'</span>
+          <div class="stat-lbl">Dauer</div>
         </div>
       </div>
-      <div style="margin-top:1.5rem;">
-        <button class="btn btn-primary" onclick="startTest()" style="width:100%; padding:16px; font-size:15px;">Test starten →</button>
-      </div>
+
+      <button class="start-btn" onclick="startTest()">Test starten →</button>
     </div>
   `;
 }
 
+// ── RENDER QUESTION ──
 function renderQuestion() {
   const q = questions[current];
-  const progress = (current / questions.length) * 100;
+  const pct = (current / questions.length) * 100;
   document.getElementById("app").innerHTML = `
     <div class="fade-in">
-      <div class="progress-track"><div class="progress-fill" style="width:${progress}%"></div></div>
-      <div class="screen-counter">${current + 1} / ${questions.length}</div>
+      <div class="prog-wrap">
+        <div class="prog-meta">
+          <span class="prog-label">${current + 1} / ${questions.length}</span>
+          <span class="prog-cat">${q.cat}</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" style="width:${pct}%"></div></div>
+      </div>
+
       <div class="q-card">
-        <div class="q-cat">${q.cat}</div>
         <p class="q-text">${q.text}</p>
       </div>
+
       <div class="options">
         ${q.opts.map((o, i) => `
           <button class="opt${answers[current] === i ? ' selected' : ''}" onclick="selectOpt(${i})">
-            <span class="opt-dot"></span>
-            <span class="opt-text">${o}</span>
+            <span class="opt-radio"></span>
+            <span>${o}</span>
           </button>
         `).join('')}
       </div>
-      <div class="nav-row" style="margin-top:1.5rem;">
-        <button class="btn" onclick="goBack()" ${current === 0 ? 'disabled' : ''}>← Zurück</button>
-        <button class="btn btn-primary" id="nextBtn" onclick="goNext()" ${answers[current] === null ? 'disabled' : ''}>
-          ${current === questions.length - 1 ? 'Ergebnis ansehen →' : 'Weiter →'}
+
+      <div class="nav-row">
+        <button class="btn-back" onclick="goBack()" ${current === 0 ? 'disabled' : ''}>← Zurück</button>
+        <button class="btn-next" onclick="goNext()" ${answers[current] === null ? 'disabled' : ''}>
+          ${current === questions.length - 1 ? 'Auswertung starten →' : 'Weiter →'}
         </button>
       </div>
     </div>
   `;
 }
 
-function renderResult() {
+// ── RENDER LOADING ──
+function renderLoading() {
+  document.getElementById("app").innerHTML = `
+    <div class="fade-in">
+      <div class="loading-wrap">
+        <div class="spinner"></div>
+        <p class="loading-text">KI analysiert deine Antworten…</p>
+        <p class="loading-sub">Wird gleich fertig – dies dauert einen Moment.</p>
+      </div>
+    </div>
+  `;
+}
+
+// ── RENDER RESULT ──
+function renderResult(aiText) {
   const totalScore = answers.reduce((s, a) => s + (a ?? 0), 0);
   const maxScore = questions.length * 3;
   const pct = Math.round((totalScore / maxScore) * 100);
   const level = getLevel(pct);
-  const currentTips = tips[level.tipLevel];
+  const currentTips = tips[level.tipKey];
 
   document.getElementById("app").innerHTML = `
     <div class="fade-in">
-      <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
-      <div class="result-hero" style="--result-color:${level.color};">
-        <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:0.5rem;">Dein Ergebnis</div>
-        <div class="result-pct" id="resultPct">${pct}%</div>
+      <div class="result-score-card" style="--result-accent:${level.color}">
+        <div class="result-eyebrow">Dein Ergebnis</div>
+        <div class="result-pct">${pct}%</div>
         <div class="result-label">${level.label}</div>
         <div class="result-bar-bg">
-          <div class="result-bar-fill" id="resultBar" style="background:${level.color};"></div>
+          <div class="result-bar-fill" id="mainBar" style="background:${level.color}"></div>
         </div>
-        <p class="result-desc">${level.desc}</p>
       </div>
 
-      <div class="section-label">Auswertung nach Bereich</div>
+      <div class="ai-card">
+        <div class="ai-header">
+          <div class="ai-dot"></div>
+          <span class="ai-label">KI-Analyse · Persönliche Auswertung</span>
+        </div>
+        <p class="ai-text">${aiText}</p>
+      </div>
+
+      <div class="section-label" style="margin-top:1.5rem">Auswertung nach Bereich</div>
       <div class="cat-grid">
         ${cats.map(cat => {
           const s = catScore(cat);
-          const v = catVerdict(s);
           return `<div class="cat-card">
             <div class="cat-name">${cat}</div>
             <div class="cat-bar-bg">
-              <div class="cat-bar-fill" data-pct="${s}" style="background:${catColors[cat]};"></div>
+              <div class="cat-bar-fill" data-pct="${s}" style="background:${catColors[cat]}"></div>
             </div>
-            <div class="cat-score-row">
+            <div class="cat-row">
               <span class="cat-pct" style="color:${catColors[cat]}">${s}%</span>
-              <span class="cat-verdict">${v}</span>
+              <span class="cat-word">${catWord(s)}</span>
             </div>
           </div>`;
         }).join('')}
       </div>
 
       <div class="tips-card">
-        <h3>Was du tun kannst</h3>
+        <h3>Was du konkret tun kannst</h3>
         ${currentTips.map(t => `
-          <div class="tip-item">
+          <div class="tip-row">
             <span class="tip-icon">${t.icon}</span>
             <span>${t.text}</span>
           </div>
         `).join('')}
       </div>
 
-      <button class="btn btn-primary" onclick="restartTest()" style="width:100%; padding:14px; font-size:14px;">Test wiederholen</button>
+      <button class="restart-btn" onclick="restartTest()">↩ Test wiederholen</button>
 
-      <div class="source">
-        Basiert auf Kriterien der Smartphone Addiction Scale (SAS, Kwon et al., 2013).<br>
-        Kein klinisches Diagnosewerkzeug – dient der persönlichen Selbstreflexion.
+      <div class="source-note">
+        Basiert auf der Smartphone Addiction Scale (SAS, Kwon et al., 2013).<br>
+        Kein klinisches Diagnosewerkzeug – zur persönlichen Selbstreflexion. Auswertung KI-generiert.
       </div>
     </div>
   `;
 
   setTimeout(() => {
-    const bar = document.getElementById("resultBar");
+    const bar = document.getElementById("mainBar");
     if (bar) bar.style.width = pct + "%";
     document.querySelectorAll(".cat-bar-fill[data-pct]").forEach(el => {
       el.style.width = el.getAttribute("data-pct") + "%";
     });
-  }, 150);
+  }, 200);
 }
 
-function startTest() { phase = "test"; current = 0; render(); }
-function selectOpt(i) { answers[current] = i; render(); }
-function goBack() { if (current > 0) { current--; render(); } }
-function goNext() {
-  if (answers[current] === null) return;
-  if (current === questions.length - 1) { phase = "result"; render(); }
-  else { current++; render(); }
+// ── AI CALL ──
+async function fetchAIAnalysis(pct, level, catScores) {
+  const catSummary = cats.map(c => `${c}: ${catScores[c]}%`).join(", ");
+  const prompt = `Du bist ein Experte für Handysucht und Medienkonsum bei Jugendlichen. Eine Person hat einen Selbsttest gemacht und folgende Ergebnisse erzielt:
+
+Gesamtergebnis: ${pct}% (${level.label})
+Bereiche: ${catSummary}
+
+Schreibe eine persönliche, ehrliche und einfühlsame Auswertung auf Deutsch (4-5 Sätze). Erkläre was das Ergebnis bedeutet, was die auffälligsten Bereiche zeigen, und gib eine kurze ehrliche Einschätzung. Sprich die Person direkt mit "du" an. Kein Markdown, keine Listen – nur Fliesstext.`;
+
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-6",
+        max_tokens: 1000,
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+    const data = await response.json();
+    return data.content?.[0]?.text || fallbackText(pct, level);
+  } catch (e) {
+    return fallbackText(pct, level);
+  }
 }
+
+function fallbackText(pct, level) {
+  if (pct < 30) return "Dein Ergebnis zeigt, dass du einen sehr bewussten und kontrollierten Umgang mit deinem Handy hast. Du nutzt es als Werkzeug, ohne dich davon abhängig zu machen – das ist heutzutage keine Selbstverständlichkeit. Behalte diese Gewohnheiten bei und teile sie gerne mit anderen.";
+  if (pct < 50) return "Du nutzt dein Handy regelmässig, hast aber noch die Kontrolle darüber. Es gibt einzelne Bereiche, wo du etwas aufpassen kannst – zum Beispiel wie du das Gerät vor dem Schlafen nutzt. Mit ein paar kleinen Gewohnheitsänderungen bleibst du auf einem guten Weg.";
+  if (pct < 65) return "Dein Ergebnis zeigt einen problematischen Handygebrauch in bestimmten Bereichen. Das Gerät beeinflusst deinen Alltag spürbar – ob beim Schlafen, in sozialen Situationen oder bei der Konzentration. Es lohnt sich, gezielt handyfreie Zeiten einzuführen.";
+  if (pct < 80) return "Dein Ergebnis zeigt deutliche Zeichen von Handyabhängigkeit. Das Gerät hat sich tief in deinen Alltag eingenistet – du greifst automatisch danach, verlierst das Zeitgefühl und fühlst dich unwohl ohne es. Jetzt ist ein guter Moment, bewusste Schritte zu machen.";
+  return "Dein Ergebnis ist ein starkes Signal: Das Handy bestimmt deinen Alltag erheblich. Viele Verhaltensweisen laufen automatisch ab, und die Kontrolle darüber ist schwierig geworden. Sprich mit jemandem dem du vertraust – das ist kein Zeichen von Schwäche, sondern von Stärke.";
+}
+
+// ── CONTROLS ──
+function startTest() { phase = "test"; current = 0; render(); }
+
+function selectOpt(i) { answers[current] = i; render(); }
+
+function goBack() { if (current > 0) { current--; render(); } }
+
+async function goNext() {
+  if (answers[current] === null) return;
+  if (current === questions.length - 1) {
+    phase = "loading";
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    const totalScore = answers.reduce((s, a) => s + (a ?? 0), 0);
+    const pct = Math.round((totalScore / (questions.length * 3)) * 100);
+    const level = getLevel(pct);
+    const catScores = {};
+    cats.forEach(c => { catScores[c] = catScore(c); });
+
+    const aiText = await fetchAIAnalysis(pct, level, catScores);
+    phase = "result";
+    renderResult(aiText);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    current++;
+    render();
+  }
+}
+
 function restartTest() {
   answers = new Array(questions.length).fill(null);
   current = 0;
@@ -707,7 +948,7 @@ function render() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
   if (phase === "intro") renderIntro();
   else if (phase === "test") renderQuestion();
-  else renderResult();
+  else if (phase === "loading") renderLoading();
 }
 
 render();
