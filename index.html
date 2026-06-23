@@ -615,6 +615,36 @@ body {
   margin-top: 1.5rem;
 }
 
+
+/* ── Accept checkbox ── */
+.accept-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 0.5px solid var(--border);
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--ink-muted);
+  user-select: none;
+}
+
+.accept-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+
+.start-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 /* ── Fade ── */
 .fade-in { animation: fadeUp 0.35s ease forwards; }
 @keyframes fadeUp {
@@ -727,6 +757,10 @@ function renderIntro() {
           <span class="picon">📋</span>
           <span>Dieser Test basiert auf der Smartphone Addiction Scale (SAS) und dient der <strong>Selbstreflexion</strong>, nicht als klinische Diagnose.</span>
         </div>
+        <label class="accept-row" for="acceptCheck">
+          <input type="checkbox" id="acceptCheck" onchange="toggleStart()">
+          <span>Ich habe die Hinweise gelesen und akzeptiere diese.</span>
+        </label>
       </div>
 
       <div class="stats-row">
@@ -744,7 +778,7 @@ function renderIntro() {
         </div>
       </div>
 
-      <button class="start-btn" onclick="startTest()">Test starten →</button>
+      <button class="start-btn" id="startBtn" onclick="startTest()" disabled>Test starten →</button>
     </div>
   `;
 }
@@ -907,6 +941,21 @@ function fallbackText(pct, level) {
 }
 
 // ── CONTROLS ──
+function toggleStart() {
+  const cb = document.getElementById("acceptCheck");
+  const btn = document.getElementById("startBtn");
+  if (!btn || !cb) return;
+  if (cb.checked) {
+    btn.disabled = false;
+    btn.style.opacity = "1";
+    btn.style.pointerEvents = "auto";
+  } else {
+    btn.disabled = true;
+    btn.style.opacity = "0.35";
+    btn.style.pointerEvents = "none";
+  }
+}
+
 function startTest() { phase = "test"; current = 0; render(); }
 
 function selectOpt(i) { answers[current] = i; render(); }
